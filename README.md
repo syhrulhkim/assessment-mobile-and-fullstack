@@ -176,26 +176,6 @@ API docs:
 - Mobile uses a screen-driven architecture with isolated `services/api.ts` for network logic.
 - Mobile offline fallback persists latest fetched list data to AsyncStorage and reads cache when network fails.
 
-## What I Would Improve With More Time
-
-- Add DB-level protection for duplicate throttling (e.g., transactional locks/idempotency keys).
-- Add broader API, frontend, and mobile test coverage.
-- Add optimistic updates in web and mobile for better UX.
-- Add CI pipeline and deployment manifests.
-
-## Improvement Backlog (Recommended Next)
-
-- Priority 1: Completed - API auth (`Laravel Sanctum`) and task route protection.
-- Priority 1: Completed - unified JSON error response formatter.
-- Priority 1: Completed - frontend and mobile environment switching (`dev`, `staging`, `prod`).
-- Priority 2: Add end-to-end test flow (`create -> filter -> complete -> delete`) for web using Playwright.
-- Priority 2: Add API contract tests for request/response schema consistency.
-- Priority 2: Add mobile component tests and screen tests (Jest + React Native Testing Library).
-- Priority 3: Add CI pipeline (lint, tests, build) via GitHub Actions for all three apps.
-- Priority 3: Add observability (`Sentry` + request logging + API timing metrics).
-- Priority 3: Add production Dockerfiles per app and deployment workflow docs.
-- Priority 3: Add rate limiting and abuse protection for task creation endpoint.
-
 ## Automated Tests
 
 Backend includes feature tests:
@@ -210,19 +190,3 @@ Run:
 cd backend/laravel-api
 php artisan test
 ```
-
-## Bonus Coverage Summary
-
-Implemented bonus items:
-- Backend: pagination + Repository/Service pattern + multiple tests.
-- Frontend: TanStack Query + advanced form validation.
-- Mobile: TypeScript + offline data support.
-- Overall: `docker-compose.yml` + automated tests.
-
-## Deployment / Mobile Build
-
-No live deployment URL or Expo/TestFlight/APK link is included in this local submission.
-The codebase is prepared for deployment and can be published to:
-- Backend: Railway / Render / Fly.io
-- Frontend: Vercel
-- Mobile: Expo EAS Build
