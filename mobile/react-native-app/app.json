@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "TaskMobileApp",
+    "slug": "task-mobile-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.anonymous.task-mobile-app"
+    }
+  }
+}
