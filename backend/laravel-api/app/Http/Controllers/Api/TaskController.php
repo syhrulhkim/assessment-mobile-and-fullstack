@@ -50,6 +50,27 @@ class TaskController extends Controller
         ], 201);
     }
 
+    public function search(Request $request): JsonResponse
+    {
+        $title = $request->query('title');
+
+        if (empty($title)) {
+            return response()->json([
+                'message' => 'Title query parameter is required.',
+                'errors' => [
+                    'title' => ['The title query parameter is required.'],
+                ],
+            ], 422);
+        }
+
+        $tasks = $this->taskService->searchTasksByTitle($title);
+
+        return response()->json([
+            'message' => 'Tasks fetched successfully',
+            'data' => $tasks,
+        ]);
+    }
+
     public function update(UpdateTaskRequest $request, Task $task): JsonResponse
     {
         return response()->json([

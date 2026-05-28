@@ -60,6 +60,12 @@ export default function TaskListScreen({ navigation }: Props) {
     };
   }, [loadData]);
 
+  const setSearchTerm = (value: string) => {
+    setStatusFilter('');
+    setPriorityFilter('');
+    loadData();
+  };
+
   const startEdit = (task: Task) => {
     setEditingTaskId(task.id);
     setEditTitle(task.title);
@@ -170,7 +176,7 @@ export default function TaskListScreen({ navigation }: Props) {
       <View style={styles.listCard}>
         <Text style={styles.sectionTitle}>Task List</Text>
         <Text style={styles.sectionSubtitle}>Filter, complete, and clean up tasks quickly.</Text>
-
+        <TextInput placeholder="Search tasks..." onChangeText={(text: string) => setSearchTerm(text)} />
         <Text style={styles.filterTitle}>Status</Text>
         <View style={styles.row}>
           {(['', 'pending', 'completed'] as Array<TaskStatus | ''>).map((value) => (

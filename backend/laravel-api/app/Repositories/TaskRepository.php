@@ -23,6 +23,14 @@ class TaskRepository
         return $query->paginate($perPage);
     }
 
+    public function searchByTitle(string $title)
+    {
+        return Task::query()
+            ->where('title', 'like', '%' . $title . '%')
+            ->latest()
+            ->get();
+    }
+
     public function hasRecentDuplicateTitle(string $title, int $seconds = 10): bool
     {
         return Task::query()

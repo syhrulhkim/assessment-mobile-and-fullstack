@@ -18,6 +18,11 @@ class TaskService
         return $this->taskRepository->paginateByStatusAndPriority($status, $priority, $perPage);
     }
 
+    public function searchTasksByTitle(string $title)
+    {
+        return $this->taskRepository->searchByTitle($title);
+    }
+
     public function createTask(array $validated): Task
     {
         if ($this->taskRepository->hasRecentDuplicateTitle($validated['title'])) {

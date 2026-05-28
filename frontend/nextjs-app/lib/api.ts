@@ -132,6 +132,33 @@ export async function getTasks(status?: string, priority?: string): Promise<Task
   return payload.data.data ?? payload.data;
 }
 
+export async function searchTasks(query: string): Promise<Task[]> {
+  let response: Response;
+  try {
+    response = await fetch(`${API_URL}/tasks/search?title=${encodeURIComponent(query)}`, {
+      cache: 'no-store',
+      headers: getAuthToken()
+        ? { Accept: 'application/json', Authorization: `Bearer ${getAuthToken()}` }
+        : { Accept: 'application/json' },
+    });
+  } catch (error) {
+    handleNetworkError(error, 'Searching tasks');
+  }
+
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({}));
+    if (response.status === 401) {
+      throw new Error(
+        'Unauthorized: backend requires auth token. Set NEXT_PUBLIC_API_TOKEN in frontend/.env.local using token from /api/auth/login.'
+      );
+    }
+    throw new Error(payload?.message ?? 'Failed to search tasks');
+  }
+
+  const payload = await response.json();
+  return payload.data.data ?? payload.data;
+}
+
 export async function createTask(input: {
   title: string;
   description?: string;
